@@ -130,9 +130,4 @@ Este proyecto es educativo y de uso libre con fines académicos.
 
 ---
 
-# Demo de conflictto
-
-Cambio una línea desden main.
-
-
 Desarrollado con ❤️ para la capacitación del IPAP.
