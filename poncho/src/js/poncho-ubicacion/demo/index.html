@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script 
+      src="https://www.argentina.gob.ar/profiles/argentinagobar/libraries/jquery.jquery-371/jquery-3.7.1.min.js" >
+</script>
+  <title>Demo Poncho Ubicación</title>
+</head>
+
+<body>
+<form method="post">
+  <main class="container">
+    <h1>Form</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <!-- Provincia -->
+        <div class="form-item webform-component webform-component-textfield 
+                    webform-component--provincia-entidad form-group form-item 
+                    form-item-submitted-provincia-entidad 
+                    form-type-textfield form-group">
+          <label class="control-label" for="edit-submitted-provincia-entidad">
+            Provincia
+          </label>
+          <input 
+              required="required"
+              class="form-control form-text required" 
+              type="text" 
+              id="edit-submitted-provincia-entidad"
+              name="submitted[provincia_entidad]" 
+              value="" 
+              size="60" 
+              maxlength="128">
+        </div>
+        <!-- / Provincia -->
+
+        <!-- Municipio -->
+        <div class="form-item webform-component webform-component-textfield 
+                    webform-component--municipio-entidad form-group form-item 
+                    form-item-submitted-municipio-entidad form-type-textfield 
+                    form-group">
+          <label class="control-label" for="edit-submitted-municipio-entidad">
+            Municipio
+          </label>
+          <input 
+              required="required"
+              class="form-control form-text required" 
+              type="text" 
+              id="edit-submitted-municipio-entidad" 
+              name="submitted[municipio_entidad]" 
+              value="" 
+              size="60" 
+              maxlength="128">
+        </div>
+        <!-- / Municipio -->
+
+        <!-- Localidad -->
+        <div class="form-item webform-component webform-component-textfield 
+                    webform-component--localidad-entidad form-group form-item 
+                    form-item-submitted-localidad-entidad form-type-textfield 
+                    form-group">
+          <label class="control-label" for="edit-submitted-localidad-entidad">
+            Localidad 
+          </label>
+          <input 
+              required="required"
+              class="form-control form-text required" 
+              type="text" 
+              id="edit-submitted-localidad-entidad" 
+              name="submitted[localidad_entidad]" 
+              value="" 
+              size="60" 
+              maxlength="128">
+        </div>
+        <!-- / Localidad -->
+        
+        <div class="form-item">
+            <input type="submit" class="btn bt-primary" value="Enviar">
+        </div>
+      </div>
+    </div>
+  </main>
+
+</form>
+  <!-- Scripts -->
+
+  <div class=""><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/i18n/es.js"></script>
+  <script src="../poncho-ubicacion.js"></script>
+  <script>
+  var conf = {
+    'provincia': 'provincia_entidad',
+    'municipio': 'municipio_entidad',
+    'localidad': 'localidad_entidad',
+    'urlProvincias': './data/geoprovincias.json',
+    'urlMunicipios': './data/geomunicipios.json',
+    'urlLocalidades': './data/geolocalidades.json',
+  };
+  jQuery(function() {
+    ponchoUbicacion(conf);
+  });
+</script>
+</body>
+</html>

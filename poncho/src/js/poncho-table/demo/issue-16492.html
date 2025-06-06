@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <link rel="profile" href="http://www.w3.org/1999/xhtml/vocab" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script 
+      src="https://www.argentina.gob.ar/profiles/argentinagobar/libraries/jquery.jquery-371/jquery-3.7.1.min.js?v=3.7.1" >
+    </script>
+  <link 
+      rel="stylesheet" 
+      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+  <link 
+      rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" 
+      integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+      crossorigin="anonymous" 
+      referrerpolicy="no-referrer" />  
+  <link 
+      rel="stylesheet" 
+      href="https://www.argentina.gob.ar/profiles/argentinagobar/themes/contrib/poncho/css/icono-arg.css">
+  <!-- /Base -->
+  <link rel="stylesheet" href="https://www.argentina.gob.ar/profiles/argentinagobar/themes/contrib/poncho/css/poncho.min.css" />
+  <link rel="stylesheet" href="../src/" />
+  <title>PonchoTable | Búscar y compartir</title>
+  <style>
+    body {
+        padding: 2em;
+    }
+  </style>
+
+<script src="../../utils/color.js"></script>
+<script src="../../utils/connect.js"></script>
+<script src="../../utils/string.js"></script>
+<script src="../../utils/html.js"></script>
+<script src="../poncho-table.js"></script>
+<script src="../poncho-table-dependant.js"></script>
+<script src="../../gapi-sheet-data/gapi-sheet-data.js"></script>
+<script src="https://www.argentina.gob.ar/profiles/argentinagobar/themes/contrib/poncho/vendor/bootstrap/js/bootstrap.min.js?sl43rm"></script>
+<script src="../../utils/document.js"></script>
+</head>
+<body class="p-t-3">
+<h1>Compartir enlace </h1>
+<!-- 
+<div class="m-b-2 clearfix form-group">
+    <p>Asignando el enlace a un atributo html.</p>
+    <input type="text" data-attr="value" class="form-control js-sharelink-text col-md-12" vlaue="foo">
+</div>
+
+<div class="m-b-2 clearfix form-group">
+<p><strong>Asignando el valor a un textarea form</strong></p>
+<textarea name="" id="" class="form-control js-sharelink-text col-md-12" ></textarea>
+</div>
+
+<div class="m-b-2 clearfix">
+  <p><strong>Creando un enlace html con un texto custom</strong></p>
+  <p class="js-sharelink-tag" data-label="Compartir enlace"></p>
+</div>
+
+<div class="m-b-2 clearfix">
+<p><strong>Asignando el enlace dentro de una etiqueta</strong></p>
+<p class="js-sharelink-text"></p>
+</div>
+
+<div class="m-b-2 clearfix">
+    <div class="dropdown">
+        <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Compartir enlace
+        <span class="caret"></span>
+        </button>
+        <div class="dropdown-menu p-y-1 p-x-1" aria-labelledby="about-us">
+            <p class="js-sharelink-tag m-b-0 small" id="foo1"></p>
+            <a href="#" data-toclipboard="foo1" class="small btn btn-sm btn-default m-b-0 m-t-1">Copiar al portapapeles</a>
+        </div>
+    </div>
+</div>
+<hr>
+ -->
+
+
+<!-- 
+COPIAR DESDE ACÁ…
+-->
+<!-- INCLUDE SCRIPTS -->
+<link href="https://www.argentina.gob.ar/profiles/argentinagobar/themes/contrib/poncho/css/ponchoTable-1.1.css" rel="stylesheet">
+<link href="../dist/css/ponchoRable-1.1.css" rel="stylesheet">
+<script src="https://www.argentina.gob.ar/sites/default/files/ponchotable/showdown.js"></script>
+<script src="https://www.argentina.gob.ar/profiles/argentinagobar/themes/argentinagobar/argentinagobar_theme/js/extensiones/showdown-extensions.js"></script>
+
+<script src="https://www.argentina.gob.ar/profiles/argentinagobar/themes/contrib/poncho/js/datatables.min.js"></script> 
+<script src="https://www.argentina.gob.ar/profiles/argentinagobar/themes/contrib/poncho/js/intl.min.js"></script>
+<script src="/profiles/argentinagobar/themes/contrib/poncho/js/poncho.min.js"></script>
+<!-- / INCLUDE SCRIPTS -->
+
+
+<div class="row">
+  <div class="col-sm-4" id="ponchoTableFiltroCont" style="display:none">
+    <div class="form-group">
+      <label for="ponchoTableFiltro" id="tituloFiltro">Filtro</label>
+      <select class="form-control" id="ponchoTableFiltro" name="ponchoTableFiltro">
+        <option value="">Todos</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-8" id="ponchoTableSearchCont" style="display:none">
+    <div class="form-group">
+      <label for="ponchoTableSearch">Buscá por palabra clave</label>
+      <input class="form-control" id="ponchoTableSearch" type="search" />
+    </div>
+  </div>
+  <div class="col-md-12 m-b-4">
+    <table class="table tabla-condensed _table-striped" id="ponchoTable">
+      <caption></caption>
+      <thead><tr></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+
+<script>
+    (function($) {
+        var ponchoTableOpciones = {
+            idSpread: "1CTq7lCm9Dwz4NdINAgtIE818L2_Smnv-_zvFcapjT6Q", // Informá entre comillas el ID de la planilla, siempre publicá el spreadsheet y que el enlace sea público
+            hojaNombre: "Hoja 1", // Escribí entre comillas el nombre de la pestaña de la planilla
+            tituloTabla: "banco de evaluaciones", // Siempre informá entre comillas un título corto para accesibilidad
+            ordenColumna: 1, // Informá por cuál columna se ordena la tabla, la primera columna es 1 (uno)
+            ordenTipo: "asc", // Informá entre comillas el criterio de orden: "asc" es de A a Z y de menor a mayor, "desc" es de Z a Z y de mayor a menor
+            ocultarColumnas: [], // Si querés que una o más columnas no sean visibles, informalas entre corchetes separadas por coma; la primera columna es 0 (cero)
+            cantidadItems: 10, // Informá la cantidad de filas visibles por pantalla, por defecto son 10 (diez)
+            //   filterClassList: ["col-sm-12", "col-md-6"], // PERMITE CONFIGURAR LA CANTIDAD DE COLUMNAS Y ESTILOS PARA LOS FILTROS. SI NO SE DECLARA ESTE ATRIBUTO, EL PROGRAMA LO HACE AUTOMÁTICAMENTE.
+            //   filterContClassList: ["col-md-4"], // PERMITE CONFIGURAR EL TAMAÑO DE LA COLUMNA DEL CONTENEDOR DE LOS FILTROS
+            //   searchContClassList: ["col-md-8"], // PERMITE CONFIGURAR EL TAMAÑO DE LA COLUMNA DEL CONTENEDOR DEL BUSCADOR.
+            hash: false, // SI ES TRUE, PERMITE HACER UNA BÚSQUEDA POR URL, EJ. www.argentina.gob.ar#mi_busqueda
+            markdownOptions: {
+                // "tables": true,
+                simpleLineBreaks: true,
+                extensions: [
+                    // 'details', 
+                    // 'images', 
+                    // 'alerts', 
+                    // 'numbers', 
+                    // 'ejes', 
+                    'button',
+                    'target',
+                    // 'bootstrap-tables', 
+                    // 'video'
+                ]
+            },
+            urlParams: true, // HABILITA QUE SE PUEDA INICIAR UNA PÁGINA CON TABLA BUSCADOR (CON O SIN FILTROS), CON VALORES PRE-SETEADOS 
+            pushState: true, // SI ES TRUE MODIFICA LA BARRA DE URL CON LOS PARÁMETROS QUE SE VAN SELECCIONANDO.
+            copyResults: true // ACTIVA EL BOTÓN (COPIAR RESULTADOS)
+        };
+        ponchoTable(ponchoTableOpciones);
+    })(jQuery);
+
+</script>
+<!-- / COPIAR HASTA ACA -->
+<script>
+
+</script>
+</body>
+</html>
