@@ -1,0 +1,10 @@
+
+## Instrucciones para usar BabyFramework
+
+1. Clona el repositorio o crea uno nuevo con esta estructura
+2. Ejecuta `composer install` para instalar las dependencias
+3. Configura tu archivo `.env` con los datos de tu base de datos
+4. Para usar Docker, ejecuta `docker-compose up -d`
+5. Accede a la aplicación en `http://localhost:8000`
+
+Este mini framework proporciona una base sólida para que los principiantes comiencen con PHP, incluyendo todas las características modernas que mencionaste, mientras mantiene la simplicidad para que sea fácil de entender y extender.
