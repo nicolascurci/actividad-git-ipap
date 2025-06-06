@@ -1,122 +1,133 @@
-BabyFramework - Mini Framework PHP para Principiantes
-Características principales
-✅ Arquitectura MVC (Modelo-Vista-Controlador)
+# Actividad Git IPAP - BabyFramework + Poncho
 
-✨ Motor de plantillas Blade (igual que Laravel)
+Este proyecto es una práctica de integración de tecnologías realizada como parte de una actividad del curso del IPAP. Se basa en un microframework propio llamado **BabyFramework**, al que se le integró la plantilla visual **Poncho** del Gobierno Argentino.
 
-🎨 Bootstrap 5 integrado para diseño responsive
+---
 
-🛢️ PDO MySQL para conexiones seguras a bases de datos
+## 🧱 Tecnologías Utilizadas
 
-🛣️ Sistema de rutas personalizado y fácil de usar
+- PHP 8.2
+- Composer (para autoloading)
+- BabyFramework (estructura MVC mínima propia)
+- Poncho (framework visual y de estilos)
+- Bootstrap (incluido con Poncho)
+- Docker (para contenerizar y facilitar despliegue)
+- Git y GitHub (control de versiones)
 
-🛡️ Middleware para capas de seguridad
+---
 
-🐳 Docker listo para desarrollo (PHP + MySQL + PHPMyAdmin)
+## 📁 Estructura del Proyecto
 
-📦 Composer para gestión de dependencias
-
-Requisitos mínimos
-PHP 8.0 o superior
-
-Composer 2.0+
-
-MySQL 5.7+ o MariaDB
-
-Opcional: Docker 20.10+ (para desarrollo con contenedores)
-
-Instalación completa
-1. Clonar el repositorio
-bash
-git clone https://github.com/tu-usuario/babyframework.git
-cd babyframework
-2. Configurar entorno
-bash
-cp .env.example .env  # Copiar archivo de configuración
-3. Instalar dependencias
-bash
-composer install
-4. Configuración con Docker (recomendado)
-bash
-docker-compose up -d
-5. Acceder a la aplicación
-Aplicación web: http://localhost:8000
-
-PHPMyAdmin: http://localhost:8080 (usuario: root, contraseña: secret)
-
-Estructura completa del proyecto
-babyframework/
+```
+actividad-git-ipap/
+│
 ├── app/
-│   ├── Controllers/    # Controladores de la aplicación
-│   ├── Models/         # Modelos de base de datos
-│   ├── Middleware/     # Middlewares
-│   ├── Views/          # Vistas Blade (.blade.php)
-│   └── core/           # Núcleo del framework
-│       ├── App.php     # Clase principal
-│       ├── Router.php  # Sistema de rutas
-│       └── Database.php # Conexión a DB
-├── config/
-│   ├── app.php         # Configuración general
-│   └── database.php    # Configuración DB
+│   ├── controllers/
+│   │   └── PonchoController.php
+│   ├── core/
+│   │   └── App.php
+│   ├── views/
+│       ├── poncho.blade.php          # Layout principal
+│       └── poncho-home.blade.php     # Vista de ejemplo con Poncho
+│
 ├── public/
-│   ├── assets/         # CSS, JS, imágenes
-│   └── index.php       # Punto de entrada
-├── vendor/             # Dependencias de Composer
-├── .env                # Variables de entorno
-├── .env.example        # Plantilla de configuración
-├── docker-compose.yml  # Configuración Docker
-├── Dockerfile          # Imagen PHP personalizada
-└── README.md           # Este archivo
-Configuración de base de datos
-Editar el archivo .env:
+│   ├── index.php                     # Front controller
+│   └── css/js/img                    # Recursos de Poncho copiados
+│
+├── vendor/                           # Composer autoload
+├── docker-compose.yml                # Archivo para levantar contenedor PHP + servidor
+├── Dockerfile                       # Imagen PHP 8.2 configurada
+└── README.md
+```
 
-ini
-DB_HOST=mysql       # Nombre del servicio en Docker
-DB_NAME=babyframework  # Nombre de la base de datos
-DB_USER=root        # Usuario
-DB_PASS=secret      # Contraseña
-Ejemplos de uso
-Crear una nueva ruta
-php
-// En public/index.php
-$app->router->get('/saludo', [SaludoController::class, 'mostrar']);
-Crear un controlador
-php
-// app/Controllers/SaludoController.php
-namespace App\Controllers;
+---
 
-class SaludoController {
-    public function mostrar() {
-        return view('saludo', ['mensaje' => 'Hola Mundo']);
-    }
-}
-Crear una vista Blade
-php
-{{-- app/Views/saludo.blade.php --}}
-@extends('layouts.app')
+## 🚀 ¿Cómo ejecutar el proyecto?
 
-@section('content')
-    <div class="alert alert-info">
-        {{ $mensaje }}
-    </div>
-@endsection
-Comandos Docker esenciales
-Comando	Descripción
-docker-compose up -d	Iniciar todos los servicios
-docker-compose down	Detener todos los servicios
-docker-compose ps	Ver servicios en ejecución
-docker-compose exec app bash	Acceder al contenedor PHP
-docker-compose logs -f	Ver logs en tiempo real
-Cómo contribuir
-Haz un fork del proyecto
+### Opción 1: Usando Docker
 
-Crea una rama para tu feature (git checkout -b feature/awesome-feature)
+1. Levantar el proyecto con Docker Compose:
 
-Haz commit de tus cambios (git commit -am 'Add awesome feature')
+   ```bash
+   docker-compose up -d
+   ```
 
-Haz push a la rama (git push origin feature/awesome-feature)
+2. Abrir en el navegador:
 
-Abre un Pull Request
+   ```
+   http://localhost:8000/poncho/index
+   ```
 
-Licencia
-Este proyecto está licenciado bajo la licencia MIT - ver el archivo LICENSE para más detalles.
+### Opción 2: Usando PHP nativo
+
+1. Clonar el repositorio:
+
+   ```bash
+   git clone https://github.com/tuusuario/actividad-git-ipap.git
+   cd actividad-git-ipap
+   ```
+
+2. Levantar servidor PHP embebido:
+
+   ```bash
+   php -S localhost:8000 -t public
+   ```
+
+3. Abrir en navegador:
+
+   ```
+   http://localhost:8000/poncho/index
+   ```
+
+---
+
+## 🎨 Integración con Poncho
+
+Poncho es un framework visual oficial del Gobierno Argentino que provee estilos, componentes y tipografías para sitios web institucionales.
+
+Se integró copiando sus archivos CSS, JS e imágenes al directorio `public/` y armando un layout base (`poncho.blade.php`) que sirve para reutilizar el diseño en las vistas del framework propio.
+
+---
+
+## 🏛️ Repositorio clonado: Poncho - Gobierno Argentino
+
+Este proyecto incluye archivos obtenidos del repositorio oficial de [Poncho](https://github.com/argob/poncho), el framework visual del Gobierno Argentino.
+
+### ¿Qué es Poncho?
+
+Poncho está pensado para crear sitios accesibles, consistentes y responsivos alineados con la identidad visual del Estado. Utiliza Bootstrap como base y adapta sus componentes a una estética gubernamental.
+
+Repositorio oficial: [https://github.com/argob/poncho](https://github.com/argob/poncho)
+
+---
+
+## 🧠 Aprendé sobre ramas en Git
+
+Aquí te compartimos dos herramientas interactivas para practicar ramas en Git:
+
+### 1. [Learn Git Branching](https://learngitbranching.js.org/)
+
+Simulador interactivo para practicar comandos de Git con visualizaciones que facilitan entender conceptos complejos.
+
+### 2. [Git School – Visualizing Git](https://git-school.github.io/visualizing-git/)
+
+Herramienta visual para entender cómo funcionan los commits y las ramas con diagramas animados.
+
+---
+
+## ✅ Objetivo del proyecto
+
+- Practicar el uso de ramas con Git y manejo de conflictos.
+- Integrar plantillas visuales oficiales a un framework propio.
+- Aprender buenas prácticas en separación de lógica y presentación.
+- Conocer herramientas modernas para desarrollo con PHP 8.2 y Docker.
+
+---
+
+## 📄 Licencia
+
+Este proyecto es educativo y de uso libre con fines académicos.
+
+---
+
+Desarrollado con ❤️ para la capacitación del IPAP.
