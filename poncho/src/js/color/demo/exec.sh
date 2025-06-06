@@ -1,1 +1,0 @@
-sass --update --trace ./src/scss/main.scss:./dist/css/main.css  --style compressed
