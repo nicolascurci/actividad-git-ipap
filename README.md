@@ -130,4 +130,8 @@ Este proyecto es educativo y de uso libre con fines académicos.
 
 ---
 
+# Demo de conflicto
+
+Cambio desde la rama readme-personalizado.
+
 Desarrollado con ❤️ para la capacitación del IPAP.
